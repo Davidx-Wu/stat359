@@ -2452,7 +2452,7 @@ window.Quarto = {
 <p>Before you start, make sure you <strong>read the README.md</strong> in the github repo for important setup information. You need to install some Python libraries before you can successfully do this assignment. A lot of code is provided in this notebook, and we highly encourage you to read and understand it as part of the learning :)</p>
 <p>If you aren’t super familiar with Python, Numpy, or Matplotlib. The STAT303-1 <a href="https://lizhen0909.github.io/nu-stat303-1-sec20-coursebook/">textbook chapters on Python/Numpy basics</a> are a great resource.</p>
 <p><strong>Assignment Notes:</strong> Please make sure to save the notebook as you go along. Submission Instructions are located at the bottom of the notebook.</p>
-<div id="cell-2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-03-27T08:04:19.343709Z&quot;,&quot;start_time&quot;:&quot;2024-03-27T08:04:15.222676Z&quot;}}" data-execution_count="78">
+<div id="cell-2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-03-27T08:04:19.343709Z&quot;,&quot;start_time&quot;:&quot;2024-03-27T08:04:15.222676Z&quot;}}" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports (do not add additional imports unless instructed)</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
@@ -2629,7 +2629,7 @@ w_{i-n},\dots,w_{i-1},\; w_{i+1},\dots,w_{i+n}.
 <h3 class="anchored" data-anchor-id="plotting-co-occurrence-word-embeddings">Plotting Co-Occurrence Word Embeddings</h3>
 <p>In the next few cells, we’ll work with a small sample of <strong>AG News</strong> articles (<strong>N_DOCS = 300</strong>) to keep runtime reasonable. We construct a word–word co-occurrence matrix using a context window of <strong>WINDOW_SIZE = 4</strong>, and we discard infrequent words by keeping only those that appear at least <strong>MIN_COUNT = 3</strong> times.</p>
 <p>Preprocessing is intentionally minimal: all text is <strong>lowercased</strong>, and tokenization keeps <strong>alphanumeric</strong> tokens only. No additional preprocessing steps (such as stemming, lemmatization, or stopword removal) are required for this assignment.</p>
-<div id="cell-7" class="cell" data-execution_count="79">
+<div id="cell-7" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>DATASET_NAME <span class="op">=</span> <span class="st">&#39;ag_news&#39;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>N_DOCS <span class="op">=</span> <span class="dv">300</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>WINDOW_SIZE <span class="op">=</span> <span class="dv">4</span></span>
@@ -2645,7 +2645,7 @@ w_{i-n},\dots,w_{i-1},\; w_{i+1},\dots,w_{i+n}.
 </div>
 <p>We provide a helper function <code>load_corpus()</code> that loads a small, reproducible sample of <strong>AG News</strong> articles and returns them as tokenized documents.</p>
 <p>You do <strong>not</strong> need to apply any additional preprocessing for this assignment.</p>
-<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-03-27T08:06:28.097673Z&quot;,&quot;start_time&quot;:&quot;2024-03-27T08:06:28.094138Z&quot;}}" data-execution_count="80">
+<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-03-27T08:06:28.097673Z&quot;,&quot;start_time&quot;:&quot;2024-03-27T08:06:28.094138Z&quot;}}" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_corpus(dataset_name<span class="op">=</span>DATASET_NAME, n_docs<span class="op">=</span>N_DOCS, seed<span class="op">=</span><span class="dv">0</span>):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&#39;&#39;&#39;Load and tokenize a small corpus for this assignment.&#39;&#39;&#39;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    ds <span class="op">=</span> load_dataset(dataset_name, split<span class="op">=</span><span class="st">&#39;train&#39;</span>)</span>
@@ -2660,7 +2660,7 @@ w_{i-n},\dots,w_{i-1},\; w_{i+1},\dots,w_{i+n}.
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> docs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Let’s inspect a few processed reviews to see what the tokenized documents look like.</p>
-<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:361,&quot;referenced_widgets&quot;:[&quot;8edd7d55e30f465bb808b6776a44c22f&quot;,&quot;e82f4c84d9b14d0c865b75e5d6fca012&quot;,&quot;6676d23c869c4c3ab62687963c9c7810&quot;,&quot;59b2fd5f89414776a0e0a3fd34c722ac&quot;,&quot;a5de794946254027a0d49afeb0892ec4&quot;,&quot;9cc5c22d97804947a1327190e5913e97&quot;,&quot;8ea7f450ad7940c49c7e1579b1eef6c7&quot;,&quot;a31c71fd829348feb18caa4bc63f4040&quot;,&quot;efbe83768ae34b1db83fa6cad104d45f&quot;,&quot;40382282dc4943ba8effdc629706b58f&quot;,&quot;4f51ffd0cd394ecdbebffc9c1d2ef4d0&quot;,&quot;f66bda42670e498f96c415b054103d76&quot;,&quot;f8fa6ae187514f2393789cbc0e31d8f4&quot;,&quot;c183984746ce46f3be1b7db347f529d5&quot;,&quot;b4d23888bfe24de3bd7b17b27a913ba2&quot;,&quot;05e6bc29a6024c26998a8d38aa876108&quot;,&quot;8d29c9ba72b8475080a8a627cad79200&quot;,&quot;1f0ccb8f46004bdf990b5e76ada71343&quot;,&quot;d5e801c7db464bb98fed29d29a5dcd96&quot;,&quot;7e9d529fe1de4ff2a89882f256909c24&quot;,&quot;58d0c5456df84eee90ceda260c33b1d6&quot;,&quot;cf0c230e554e47678d0743c3a2665f66&quot;,&quot;df80555aca904fc78569a6d9e6c012c9&quot;,&quot;9af480a284dd4450a2aff2f4a2b9c01c&quot;,&quot;49e006e7e7b64b9790d1186bd7a2dbf3&quot;,&quot;d12bb1f2387b4a54b8c284e926eba4d5&quot;,&quot;57550049c5414e069f850aa457ea9b83&quot;,&quot;fd7fb66483a94eb6807450fa0913c9fd&quot;,&quot;987f8295f041452da4d749a55ce2c08e&quot;,&quot;39180266a9594c238a41b9fbfc8c5204&quot;,&quot;4a81af7c89674d4e9ce254bcc587bc13&quot;,&quot;448db18dcb994dba838c83095efc1594&quot;,&quot;283b05d2e26140338cf7843ad986171d&quot;,&quot;6f6c1a4b707747d49ebbc6a5d1eb3e99&quot;,&quot;1f93dad37fd34852a7548ffd68dee957&quot;,&quot;d7ca6a3eccd841088c009a5cd1662065&quot;,&quot;b826516701c84219b7a527f3f68bc158&quot;,&quot;e1e2ddeae66c49d5ac1a8614cafbc360&quot;,&quot;8f1e7618846042f081ba5310042b54f7&quot;,&quot;2552277ab03c48548c87b32a7b7710a4&quot;,&quot;f6ae47ae3f9849c4a543fff3a56344b0&quot;,&quot;7eef364a042d49118c9c0544820f2905&quot;,&quot;7e90ed1a82d04743a16636422c4b30c5&quot;,&quot;691df78c687140a8bbe9966657e599fb&quot;,&quot;08925b560ffd45b498872d72c488e9f9&quot;,&quot;8c4aecb573a14addb79bee4513b18307&quot;,&quot;ac5a30e347b34835806781b3d12dd934&quot;,&quot;200a12213c0842ad87b5a7c08fea91e0&quot;,&quot;545f468c00714ec1b4fe641898178723&quot;,&quot;13a014a245ac4f1a887c242cca0b6809&quot;,&quot;6b5f9053c6434ef39b83f68713924c37&quot;,&quot;ad6f2adea3dd4f32a238ff11cd1d5849&quot;,&quot;8e74726e602f48589ad8bf01901475ff&quot;,&quot;b5c17b8684d544349ccce585e6ee4109&quot;,&quot;f840c1d14bcf43bba1d61cc165f4f04d&quot;]}}" data-outputid="24df0556-fa20-42e9-9f93-d94dca992674" data-execution_count="81">
+<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:361,&quot;referenced_widgets&quot;:[&quot;8edd7d55e30f465bb808b6776a44c22f&quot;,&quot;e82f4c84d9b14d0c865b75e5d6fca012&quot;,&quot;6676d23c869c4c3ab62687963c9c7810&quot;,&quot;59b2fd5f89414776a0e0a3fd34c722ac&quot;,&quot;a5de794946254027a0d49afeb0892ec4&quot;,&quot;9cc5c22d97804947a1327190e5913e97&quot;,&quot;8ea7f450ad7940c49c7e1579b1eef6c7&quot;,&quot;a31c71fd829348feb18caa4bc63f4040&quot;,&quot;efbe83768ae34b1db83fa6cad104d45f&quot;,&quot;40382282dc4943ba8effdc629706b58f&quot;,&quot;4f51ffd0cd394ecdbebffc9c1d2ef4d0&quot;,&quot;f66bda42670e498f96c415b054103d76&quot;,&quot;f8fa6ae187514f2393789cbc0e31d8f4&quot;,&quot;c183984746ce46f3be1b7db347f529d5&quot;,&quot;b4d23888bfe24de3bd7b17b27a913ba2&quot;,&quot;05e6bc29a6024c26998a8d38aa876108&quot;,&quot;8d29c9ba72b8475080a8a627cad79200&quot;,&quot;1f0ccb8f46004bdf990b5e76ada71343&quot;,&quot;d5e801c7db464bb98fed29d29a5dcd96&quot;,&quot;7e9d529fe1de4ff2a89882f256909c24&quot;,&quot;58d0c5456df84eee90ceda260c33b1d6&quot;,&quot;cf0c230e554e47678d0743c3a2665f66&quot;,&quot;df80555aca904fc78569a6d9e6c012c9&quot;,&quot;9af480a284dd4450a2aff2f4a2b9c01c&quot;,&quot;49e006e7e7b64b9790d1186bd7a2dbf3&quot;,&quot;d12bb1f2387b4a54b8c284e926eba4d5&quot;,&quot;57550049c5414e069f850aa457ea9b83&quot;,&quot;fd7fb66483a94eb6807450fa0913c9fd&quot;,&quot;987f8295f041452da4d749a55ce2c08e&quot;,&quot;39180266a9594c238a41b9fbfc8c5204&quot;,&quot;4a81af7c89674d4e9ce254bcc587bc13&quot;,&quot;448db18dcb994dba838c83095efc1594&quot;,&quot;283b05d2e26140338cf7843ad986171d&quot;,&quot;6f6c1a4b707747d49ebbc6a5d1eb3e99&quot;,&quot;1f93dad37fd34852a7548ffd68dee957&quot;,&quot;d7ca6a3eccd841088c009a5cd1662065&quot;,&quot;b826516701c84219b7a527f3f68bc158&quot;,&quot;e1e2ddeae66c49d5ac1a8614cafbc360&quot;,&quot;8f1e7618846042f081ba5310042b54f7&quot;,&quot;2552277ab03c48548c87b32a7b7710a4&quot;,&quot;f6ae47ae3f9849c4a543fff3a56344b0&quot;,&quot;7eef364a042d49118c9c0544820f2905&quot;,&quot;7e90ed1a82d04743a16636422c4b30c5&quot;,&quot;691df78c687140a8bbe9966657e599fb&quot;,&quot;08925b560ffd45b498872d72c488e9f9&quot;,&quot;8c4aecb573a14addb79bee4513b18307&quot;,&quot;ac5a30e347b34835806781b3d12dd934&quot;,&quot;200a12213c0842ad87b5a7c08fea91e0&quot;,&quot;545f468c00714ec1b4fe641898178723&quot;,&quot;13a014a245ac4f1a887c242cca0b6809&quot;,&quot;6b5f9053c6434ef39b83f68713924c37&quot;,&quot;ad6f2adea3dd4f32a238ff11cd1d5849&quot;,&quot;8e74726e602f48589ad8bf01901475ff&quot;,&quot;b5c17b8684d544349ccce585e6ee4109&quot;,&quot;f840c1d14bcf43bba1d61cc165f4f04d&quot;]}}" data-outputid="24df0556-fa20-42e9-9f93-d94dca992674" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>corpus <span class="op">=</span> load_corpus()</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;num documents:&#39;</span>, <span class="bu">len</span>(corpus))</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;tokens in first document:&#39;</span>, <span class="bu">len</span>(corpus[<span class="dv">0</span>]))</span>
@@ -2676,7 +2676,7 @@ first 40 tokens: [&#39;xerces&#39;, &#39;2&#39;, &#39;6&#39;, &#39;1&#39;, &#39;
 <h3 class="anchored" data-anchor-id="question-1.1-build-a-vocabulary-with-a-minimum-count-code-6-points">Question 1.1: Build a vocabulary with a minimum count [code] (6 points)</h3>
 <p>Write a function that builds a vocabulary from <code>corpus</code> (a list of token lists).</p>
 <p>Requirements: - Count token frequencies across all documents. - Keep tokens that appear at least <code>min_count</code> times. - Return <code>vocab</code> as a <strong>sorted list</strong> and <code>word2id</code> as a mapping token -&gt; index.</p>
-<div id="cell-13" class="cell" data-execution_count="82">
+<div id="cell-13" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_vocab(corpus, min_count<span class="op">=</span>MIN_COUNT):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&#39;&#39;&#39;Return (vocab, word2id, counts) where vocab is sorted.&#39;&#39;&#39;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    counts <span class="op">=</span> {}</span>
@@ -2696,7 +2696,7 @@ first 40 tokens: [&#39;xerces&#39;, &#39;2&#39;, &#39;6&#39;, &#39;1&#39;, &#39;
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> vocab, word2id, counts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="1048148d-ef1e-4c90-ca3a-fc1d80829095" data-execution_count="83">
+<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="1048148d-ef1e-4c90-ca3a-fc1d80829095" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sanity check (deterministic toy corpus)</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>toy <span class="op">=</span> [[<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;a&#39;</span>], [<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>], [<span class="st">&#39;a&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;c&#39;</span>]]</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>vocab_toy, word2id_toy, counts_toy <span class="op">=</span> build_vocab(toy, min_count<span class="op">=</span><span class="dv">2</span>)</span>
@@ -2719,7 +2719,7 @@ first 40 tokens: [&#39;xerces&#39;, &#39;2&#39;, &#39;6&#39;, &#39;1&#39;, &#39;
 <li>Return a <strong>square</strong> NumPy array <code>C</code> of shape <code>(V, V)</code>.</li>
 <li>Make <code>C</code> symmetric by adding both directions (center-&gt;context and context-&gt;center).</li>
 </ul>
-<div id="cell-16" class="cell" data-execution_count="84">
+<div id="cell-16" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> weighted_cooccurrence(corpus, word2id, window_size<span class="op">=</span>WINDOW_SIZE):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&#39;&#39;&#39;Return symmetric weighted co-occurrence matrix C (float64).&#39;&#39;&#39;</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    V <span class="op">=</span> <span class="bu">len</span>(word2id)</span>
@@ -2752,7 +2752,7 @@ first 40 tokens: [&#39;xerces&#39;, &#39;2&#39;, &#39;6&#39;, &#39;1&#39;, &#39;
 <span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> C</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-17" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="c93d2439-b2be-4044-b084-e0e65f5e4966" data-execution_count="85">
+<div id="cell-17" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="c93d2439-b2be-4044-b084-e0e65f5e4966" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Small checks for weighted co-occurrence</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>toy <span class="op">=</span> [[<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;b&#39;</span>]]</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>vocab_toy, word2id_toy, _ <span class="op">=</span> build_vocab(toy, min_count<span class="op">=</span><span class="dv">1</span>)</span>
@@ -2769,7 +2769,7 @@ first 40 tokens: [&#39;xerces&#39;, &#39;2&#39;, &#39;6&#39;, &#39;1&#39;, &#39;
 <h3 class="anchored" data-anchor-id="question-1.3-ppmi-transform-code-6-points">Question 1.3: PPMI transform [code] (6 points)</h3>
 <p>Raw co-occurrence counts are dominated by very frequent tokens. A common fix is to convert counts into PPMI (positive pointwise mutual information).</p>
 <p>Implement <code>ppmi(C)</code> to return a matrix of the same shape. Use a small epsilon to avoid divide-by-zero.</p>
-<div id="cell-19" class="cell" data-execution_count="86">
+<div id="cell-19" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ppmi(C, eps<span class="op">=</span><span class="fl">1e-12</span>):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&#39;&#39;&#39;Convert co-occurrence matrix C to PPMI matrix.&#39;&#39;&#39;</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ------------------</span></span>
@@ -2794,7 +2794,7 @@ first 40 tokens: [&#39;xerces&#39;, &#39;2&#39;, &#39;6&#39;, &#39;1&#39;, &#39;
 <span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    PPMI <span class="op">=</span> np.maximum(PMI, <span class="dv">0</span>)</span>
 <span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> PPMI</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-20" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="8a1d93e6-db0b-45a9-d79f-f28367f0c00e" data-execution_count="87">
+<div id="cell-20" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="8a1d93e6-db0b-45a9-d79f-f28367f0c00e" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PPMI sanity check: output nonnegative and same shape</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>C_small <span class="op">=</span> np.array([[<span class="fl">0.</span>, <span class="fl">1.</span>], [<span class="fl">1.</span>, <span class="fl">0.</span>]])</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>P_small <span class="op">=</span> ppmi(C_small)</span>
@@ -2815,14 +2815,14 @@ first 40 tokens: [&#39;xerces&#39;, &#39;2&#39;, &#39;6&#39;, &#39;1&#39;, &#39;
 <li>You should use <code>fit_transform</code> (or <code>fit</code> + <code>transform</code>) rather than computing SVD manually.</li>
 <li><code>plot_words_2d</code> plots only the requested words (skip words not in the vocab).</li>
 </ul>
-<div id="cell-22" class="cell" data-execution_count="88">
+<div id="cell-22" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> reduce_2d(X, n_iter<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">0</span>):</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&#39;&#39;&#39;Return 2D embedding from matrix X using truncated SVD.&#39;&#39;&#39;</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    svd <span class="op">=</span> TruncatedSVD(n_components <span class="op">=</span> <span class="dv">2</span>, n_iter <span class="op">=</span> n_iter, random_state <span class="op">=</span> random_state)</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    Z <span class="op">=</span> svd.fit_transform(X)</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Z</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-23" class="cell" data-execution_count="89">
+<div id="cell-23" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_words_2d(Z, word2id, words, title<span class="op">=</span><span class="va">None</span>):</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&#39;&#39;&#39;Scatter plot for selected words; skip missing words.&#39;&#39;&#39;</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ------------------</span></span>
@@ -2854,7 +2854,7 @@ first 40 tokens: [&#39;xerces&#39;, &#39;2&#39;, &#39;6&#39;, &#39;1&#39;, &#39;
 <span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
 <span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-24" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:520}}" data-outputid="27e7052d-8dc1-4f43-a59d-bee89eaaa819" data-execution_count="90">
+<div id="cell-24" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:520}}" data-outputid="27e7052d-8dc1-4f43-a59d-bee89eaaa819" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Run this sanity check</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that this is not an exhaustive check for correctness.</span></span>
@@ -2889,7 +2889,7 @@ Outputted Plot:</code></pre>
 <section id="question-1.5-co-occurrence-embedding-analysis-written-4-points" class="level3">
 <h3 class="anchored" data-anchor-id="question-1.5-co-occurrence-embedding-analysis-written-4-points">Question 1.5: Co-occurrence embedding analysis [written] (4 points)</h3>
 <p><strong>Run the cell below to generate the plot.</strong> It may take a few minutes to compute the co-occurrence matrix and run SVD (depending on your machine). After the plot is generated, answer the interpretation prompt in the next markdown cell.</p>
-<div id="cell-26" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:505}}" data-outputid="e57c61dc-f550-4dc6-c7ce-477fa31217de" data-execution_count="91">
+<div id="cell-26" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:505}}" data-outputid="e57c61dc-f550-4dc6-c7ce-477fa31217de" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build Part 1 embeddings (this may take ~1-3 minutes depending on your machine)</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>vocab, word2id, counts <span class="op">=</span> build_vocab(corpus, min_count<span class="op">=</span>MIN_COUNT)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;vocab size:&#39;</span>, <span class="bu">len</span>(vocab))</span>
@@ -2929,7 +2929,7 @@ Outputted Plot:</code></pre>
 <li>The first time you run the loading cell, it will download the model and may take a few minutes.</li>
 <li>If you have downloaded it before, rerunning the cell will load from the local cache and should be faster.</li>
 </ul>
-<div id="cell-29" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="c7f2070f-9a4b-486d-e10f-893231634c3b" data-execution_count="92">
+<div id="cell-29" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="c7f2070f-9a4b-486d-e10f-893231634c3b" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_embedding_model():</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot; Load GloVe Vectors</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">        Return:</span></span>
@@ -2954,7 +2954,7 @@ Outputted Plot:</code></pre>
 <li>Put 40000 Glove vectors into a matrix M</li>
 <li>Run <code>reduce_2d</code> (your Truncated SVD function) to reduce the vectors from 100-dimensional to 2-dimensional.</li>
 </ol>
-<div id="cell-32" class="cell" data-execution_count="93">
+<div id="cell-32" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_matrix_of_vectors(wv_from_bin, required_words):</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot; Put the GloVe vectors into a matrix M.</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">        Param:</span></span>
@@ -2992,7 +2992,7 @@ Outputted Plot:</code></pre>
 <span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Done.&quot;</span>)</span>
 <span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> M, word2ind</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-33" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="4e272acd-33f6-4a93-9ea4-d3e21c1e5f78" data-execution_count="94">
+<div id="cell-33" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="4e272acd-33f6-4a93-9ea4-d3e21c1e5f78" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Cell to Reduce 100-Dimensional Word Embeddings to k Dimensions</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: This should be quick to run</span></span>
@@ -3018,7 +3018,7 @@ Done.</code></pre>
 <li>Describe one direction or axis you observe (what changes along it?).</li>
 <li>Name one word that seems out of place and propose a reason.</li>
 </ul>
-<div id="cell-36" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:465}}" data-outputid="b716ecd3-b01e-4914-a7a9-82bdee0a7340" data-scrolled="true" data-execution_count="95">
+<div id="cell-36" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:465}}" data-outputid="b716ecd3-b01e-4914-a7a9-82bdee0a7340" data-scrolled="true" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the same words as question 1.5</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>plot_words_2d(M_reduced_normalized, word2ind, words_to_plot)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -3066,7 +3066,7 @@ s = \frac{p \cdot q}{\lVert p \rVert\, \lVert q \rVert}, \qquad s \in [-1, 1]
 <p>Polysemes and homonyms have more than one meaning. Find a word with <em>at least two different senses</em> such that the top-10 most similar words (by cosine similarity) include related words from <em>both</em> senses. You will likely need to try several candidates.</p>
 <p>State the word you found and the two meanings reflected in the top 10. Why do many candidate words fail (i.e., the top-10 list reflects only one sense)?</p>
 <p><strong>Note</strong>: Use <code>wv_from_bin.most_similar(word)</code> to get the top 10 most similar words. For details, see the <a href="https://radimrehurek.com/gensim/models/keyedvectors.html#gensim.models.keyedvectors.FastTextKeyedVectors.most_similar">GenSim documentation</a>.</p>
-<div id="cell-43" class="cell" data-execution_count="96">
+<div id="cell-43" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your implementation here.</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
@@ -3123,7 +3123,7 @@ Top 10 most similar to &#39;nail&#39;:
 <p>Find three words <span class="math inline">\((w_1,w_2,w_3)\)</span> where <span class="math inline">\(w_1\)</span> and <span class="math inline">\(w_2\)</span> are synonyms and <span class="math inline">\(w_1\)</span> and <span class="math inline">\(w_3\)</span> are antonyms, but Cosine Distance <span class="math inline">\((w_1,w_3) &lt;\)</span> Cosine Distance <span class="math inline">\((w_1,w_2)\)</span>.</p>
 <p>Example (do not reuse): <span class="math inline">\(w_1\)</span>=“fast”, <span class="math inline">\(w_2\)</span>=“quick”, <span class="math inline">\(w_3\)</span>=“slow” might show this effect. Provide your own example and a short explanation for why the counter-intuitive result can happen.</p>
 <p>Use <code>wv_from_bin.distance(w1, w2)</code> to compute cosine distance. See the <a href="https://radimrehurek.com/gensim/models/keyedvectors.html#gensim.models.keyedvectors.FastTextKeyedVectors.distance">GenSim documentation</a>.</p>
-<div id="cell-46" class="cell" data-execution_count="97">
+<div id="cell-46" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your implementation here.</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
@@ -3157,7 +3157,7 @@ Top 10 most similar to &#39;nail&#39;:
 d(front, back) = 0.3144
 Condition d(w1,w3) &lt; d(w1,w2): True</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="97">
+<div class="cell-output cell-output-display" data-execution_count="20">
 <pre><code>(0.4131677746772766, 0.3143906593322754)</code></pre>
 </div>
 </div>
@@ -3179,7 +3179,7 @@ Condition d(w1,w3) &lt; d(w1,w2): True</code></pre>
 \]</span></p>
 <p>Run the cell below to see the model’s top candidates for the analogy <strong>man : grandfather :: woman : ?</strong>.</p>
 <p><strong>How <code>most_similar</code> is used:</strong> <code>most_similar(positive=[...], negative=[...])</code> returns words that are close to the sum of the positive vectors and far from the sum of the negative vectors (by cosine similarity).</p>
-<div id="cell-49" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="7f22f256-8d60-4a4e-acf3-11b8d09970f3" data-execution_count="98">
+<div id="cell-49" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="7f22f256-8d60-4a4e-acf3-11b8d09970f3" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run this cell to answer the analogy: man : grandfather :: woman : x</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>pprint.pprint(wv_from_bin.most_similar(positive<span class="op">=</span>[<span class="st">&#39;woman&#39;</span>, <span class="st">&#39;grandfather&#39;</span>], negative<span class="op">=</span>[<span class="st">&#39;man&#39;</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -3202,7 +3202,7 @@ Condition d(w1,w3) &lt; d(w1,w2): True</code></pre>
 <p>Hint: The target vector is <span class="math inline">\(w + g - m\)</span>.</p>
 <section id="write-your-answer-here.-5" class="level4">
 <h4 class="anchored" data-anchor-id="write-your-answer-here.-5"><font color="red">Write your answer here.</font></h4>
-<p>The target vector here is grandfater - man + woman or (w + g - m). The cosine similarity objective here is to maximize cos([w + g - m], x).</p>
+<p>The target vector here is grandfather - man + woman or (w + g - m). The cosine similarity objective here is to maximize cos([w + g - m], x).</p>
 </section>
 </section>
 <section id="question-2.5-interpreting-analogy-results-code-written-7-points" class="level3">
@@ -3215,7 +3215,7 @@ Condition d(w1,w3) &lt; d(w1,w2): True</code></pre>
 <p><strong>(b) (5 points)</strong> Find an analogy that <strong>does</strong> hold for these vectors (i.e., the intended word is ranked #1).</p>
 <p>In your solution, state the full analogy in the form <strong>x : y :: a : b</strong> and briefly explain (1–2 sentences) why it makes sense.</p>
 <p><strong>Tips:</strong> - You may need to try several analogies before you find one that works. - Pick words that are common in Wikipedia/news-style text (the kind of data GloVe was trained on). - You can use the helper in the next cell to print the top candidates and verify that your intended <span class="math inline">\(b\)</span> is ranked #1.</p>
-<div id="cell-55" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:183}}" data-outputid="ac3f7104-f085-4e7d-f51b-8bba01a798c5" data-execution_count="99">
+<div id="cell-55" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:183}}" data-outputid="ac3f7104-f085-4e7d-f51b-8bba01a798c5" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Choose an analogy x:y :: a:b that the embeddings solve correctly (b is ranked #1).</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># For example: x, y, a, b = (&quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;)</span></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -3273,7 +3273,7 @@ Top-1 prediction: italy</code></pre>
 \text{sock} \;\approx\; \text{foot} - \text{hand} + \text{glove}.
 \]</span></p>
 <p>Run the cell and look at the top candidates. In 2–4 sentences, give a plausible reason the intended answer might not be ranked #1. Your explanation should reference at least one of these ideas: - the training corpus may not strongly encode the “wears/used-with” relation in a consistent direction, - words like <em>glove</em> and <em>sock</em> have other associations (sports, materials, idioms, etc.), - analogies work best for certain relation types (e.g., country–capital, singular–plural), - noise from nearest-neighbor search / multiple near-ties.</p>
-<div id="cell-58" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="e7599e31-3cbf-4809-aeb8-b5ff6afc9d83" data-execution_count="100">
+<div id="cell-58" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="e7599e31-3cbf-4809-aeb8-b5ff6afc9d83" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Analogy query: hand : glove :: foot : ?</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># i.e., glove - hand + foot</span></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>pprint.pprint(wv_from_bin.most_similar(positive<span class="op">=</span>[<span class="st">&#39;foot&#39;</span>, <span class="st">&#39;glove&#39;</span>], negative<span class="op">=</span>[<span class="st">&#39;hand&#39;</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -3301,7 +3301,7 @@ Top-1 prediction: italy</code></pre>
 <li>Report the incorrect prediction <span class="math inline">\(\hat{b}\)</span> (and optionally the top-5 list) and briefly explain (1–2 sentences) why the model might prefer <span class="math inline">\(\hat{b}\)</span> over <span class="math inline">\(b\)</span>.</li>
 </ul>
 <p>Tip: Choose a relationship that is subtle, culturally specific, or not consistently expressed in text.</p>
-<div id="cell-61" class="cell" data-execution_count="101">
+<div id="cell-61" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find an analogy x:y :: a:b that the embeddings get wrong (b is NOT ranked #1).</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co"># For example: x, y, a, b = (&quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;)</span></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -3357,7 +3357,7 @@ Top-1 prediction: italy</code></pre>
 </section>
 <section id="write-your-answer-here.-9" class="level4">
 <h4 class="anchored" data-anchor-id="write-your-answer-here.-9"><font color="red">Write your answer here.</font></h4>
-<p>The analogy I tested was student, homework, musician, practice where a human would normally expect to see practice as an answer the model had the top answer <strong>bandleader</strong>. This suggests that the embedding space might emphasize professional and creative roles that are associate with musician rather than the “assigned task” relationship for museums. This only likely occurs because role-based associations apear more consistently in the training corpus rather than the general notion of practice.</p>
+<p>The analogy I tested was student, homework, musician, practice where a human would normally expect to see practice as an answer the model had the top answer <strong>bandleader</strong>. This suggests that the embedding space might emphasize professional and creative roles that are associate with musician rather than the “assigned task” relationship for musicians. This only likely occurs because role-based associations apear more consistently in the training corpus rather than the general notion of practice.</p>
 </section>
 </section>
 <section id="question-2.7-guided-analysis-of-bias-in-word-vectors-written-6-points" class="level3">
@@ -3375,7 +3375,7 @@ Top-1 prediction: italy</code></pre>
 <li>Give <strong>one</strong> plausible explanation for where such bias could come from (think training data + objective).</li>
 </ul>
 <p>Note: Individual terms may be noisy. Focus on overall patterns (e.g., recurring themes or categories).</p>
-<div id="cell-64" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="f156fbf4-3c1d-40a1-fd24-9fb363a63f33" data-execution_count="102">
+<div id="cell-64" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="f156fbf4-3c1d-40a1-fd24-9fb363a63f33" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run this cell</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Here `positive` indicates words we want to be similar to, and `negative` indicates words we want to be dissimilar from.</span></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co"># As you inspect the outputs, look for broad patterns (e.g., recurring occupations, stereotypes, or themes).</span></span>
@@ -3423,7 +3423,7 @@ Top-1 prediction: italy</code></pre>
 <li>Give one plausible explanation for where the association could come from (training data and/or objective).</li>
 </ul>
 <p>Important: Describe the phenomenon at a high level. You do not need to reproduce or emphasize offensive language; focus on overall patterns.</p>
-<div id="cell-67" class="cell" data-execution_count="103">
+<div id="cell-67" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your implementation here.</span></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
@@ -3504,7 +3504,7 @@ Query B:
 <p>In 4–6 sentences, explain your reasoning.</p>
 <section id="write-your-answer-here.-12" class="level4">
 <h4 class="anchored" data-anchor-id="write-your-answer-here.-12"><font color="red">Write your answer here.</font></h4>
-<p>One plausible explanation for how bias enters the word vectors during training is through the data and the learning objective. Word embeddings are generally trained on large text databases like news articles and Wikipedia which already generally reflect societal inequalities and biases in the discussion of different groups. The train objective is based on predicting or modeling word co-occurrence and as such the model learns associates that appear frequently in the data regardless of if the associations are biased or unbaised. An example of this is if certain professions are mentioned alongside a particular democraphic the embeddings will encode the pattern. The model has no notion of fairness or intent but rather simply calculates statistical regularities.</p>
+<p>One plausible explanation for how bias enters the word vectors during training is through the data and the learning objective. Word embeddings are generally trained on large text databases like news articles and Wikipedia which already generally reflect societal inequalities and biases in the discussion of different groups. The training objective is based on predicting or modeling word co-occurrence and as such the model learns associations that appear frequently in the data regardless of if the associations are biased or unbiased. An example of this is if certain professions are mentioned alongside a particular demographic the embeddings will encode the pattern. The model has no notion of fairness or intent but rather simply calculates statistical regularities.</p>
 <p><strong>(b) (5 points)</strong> Describe <strong>one</strong> method to mitigate bias in word vectors in 4–6 sentences:</p>
 <p>Examples of acceptable directions (pick one; do not do all):</p>
 <ul>
@@ -3515,7 +3515,7 @@ Query B:
 </section>
 <section id="write-your-answer-here.-13" class="level4">
 <h4 class="anchored" data-anchor-id="write-your-answer-here.-13"><font color="red">Write your answer here.</font></h4>
-<p>One way to mitigate such a bias in word vectors is post-processing debiasing. This approach first identifies a “bias direction” within the embeddings space such as the direction that separates words like man and woman. After this direction is identified embeddings for neutral words such as professions can be adjusted to reduce their projection in a biased direction while preserving the other relationships that already exist in the space. This helps limited the biased associations without retraining the model from the ground-up. While post-processing may not be able to remove every bit of bias it may be able to significantly reduce its impact while keeping embeddings useful for downstream tasks.</p>
+<p>One way to mitigate such a bias in word vectors is post-processing debiasing. This approach first identifies a “bias direction” within the embeddings space such as the direction that separates words like man and woman. After this direction is identified embeddings for neutral words such as professions can be adjusted to reduce their projection in a biased direction while preserving the other relationships that already exist in the space. This helps limit the biased associations without retraining the model from the ground-up. While post-processing may not be able to remove every bit of bias it may be able to significantly reduce its impact while keeping embeddings useful for downstream tasks.</p>
 </section>
 </section>
 </section>
